@@ -3,7 +3,7 @@ A .NET collection of nodes and their values, allowing interpolation between thos
 
 # Example
 ```csharp
-var linearColorInterpolation = (Color from, Color to, double factor) =>
+InterpolatingFunction<Color> linearColorInterpolation = (Color from, Color to, double factor) =>
 {
     var a = InterpolatingFunctions.LinearDouble(from.A, to.A, factor);
     var r = InterpolatingFunctions.LinearDouble(from.R, to.R, factor);

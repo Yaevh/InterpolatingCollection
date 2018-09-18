@@ -3,6 +3,7 @@ A .NET collection of nodes and their values, allowing interpolation between thos
 
 # Example
 ```csharp
+// define our interpolation (or use on of the standard ones from InterpolatingFunctions class)
 InterpolatingFunction<Color> linearColorInterpolation = (Color from, Color to, double factor) =>
 {
     var a = InterpolatingFunctions.LinearDouble(from.A, to.A, factor);
@@ -13,13 +14,15 @@ InterpolatingFunction<Color> linearColorInterpolation = (Color from, Color to, d
     return Color.FromArgb((int)a, (int)r, (int)g, (int)b);
 };
 
-var collection = new InterpolatingCollection<Color>(linearColorInterpolation)
-{
-    new InterpolationNode<Color>(0.0, Color.Black),
-    new InterpolationNode<Color>(100.0, Color.White)
-};
+// create a collection and add some points
+var collection = new InterpolatingCollection<Color>(linearColorInterpolation);
+collection[0.0] = Color.Black;
+collection[100.0] = Color.White;
 
-var lightGray = collection[25.0];
-var middleGray = collection[50.0];
-var darkGray = collection[75.0];
+// retrieve interpolated values
+var black = collection[0.0];
+var darkGray = collection[25.0];
+var gray = collection[50.0];
+var lightGray = collection[75.0];
+var white = collection[100.0];
 ```
